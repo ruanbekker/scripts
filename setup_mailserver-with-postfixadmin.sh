@@ -16,7 +16,7 @@ yum update -y
 yum groupinstall 'Development Tools' -y
 yum remove sendmail exim -y
 
-yum install postfix ntp httpd httpd-devel mod_ssl mod_python mysql-server php php-mysql php-imap php-mbstring phpmyadmin dovecot dovecot-mysql -y
+yum install perl-cpan postfix ntp httpd httpd-devel mod_ssl mod_python mysql-server php php-mysql php-imap php-mbstring phpmyadmin dovecot dovecot-mysql -y
 yum install openssl amavisd-new spamassassin clamav clamd unzip bzip2 unrar perl-DBD-mysql -y
 yum install php php-devel php-gd php-imap php-ldap php-mysql php-odbc php-pear php-xml php-xmlrpc php-pecl-apc php-mbstring php-mcrypt php-mssql php-snmp php-soap php-tidy curl curl-devel perl-libwww-perl ImageMagick libxml2 libxml2-devel mod_fcgid php-cli httpd-devel perl-DateTime-Format-HTTP perl-DateTime-Format-Builder -y
 
