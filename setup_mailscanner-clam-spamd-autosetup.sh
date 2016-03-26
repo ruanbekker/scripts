@@ -4,6 +4,7 @@
 # Sources:
 # http://xmodulo.com/mailscanner-clam-antivirus-spamassassin-centos.html
 # mailscanner setup 01
+# tag: ms1
 
 yum update -y
 rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
