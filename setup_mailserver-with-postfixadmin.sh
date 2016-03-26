@@ -2,7 +2,7 @@
 
 # Ruan Bekker <ruan@ruanbekker.com>
 # Info:
-# MailServer with VirtualUsers + MySQL + PostfixAdmin
+# MailServer with VirtualUsers + MySQL + PostfixAdmin + Amavisd + Spamassassin
 # tag: mail1
 
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
