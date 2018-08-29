@@ -6,6 +6,10 @@
 #                                  # 
 #  Tested on:                      # 
 #  - Debian Jessie                 # 
+#  
+#  Improvements Needed:            #
+#  - https://syslint.com/blog/tutorial/how-to-install-and-configure-spamassassin-with-postfix-in-debian-8/ #
+#  - Letsencrypt                   #
 # ================================ #
 
 echo "Enter Fully Qualified Domain Name:"
