@@ -24,8 +24,9 @@ fi
 if [[ $# -eq 0 ]]
 then
     echo ""
-    echo "Secret path and value needed"
-    echo "eg: $0 secret/tmp/hostname app.example.com"
+    echo "Action required:"
+    echo "eg: $0 get params"
+    echo "eg: $0 put params"
     echo ""
     exit 1
 fi
