@@ -12,6 +12,13 @@
 # Put:
 # ./vault_secrets.sh put secret/tmp/hostname app.example.com
 
+# check if dependencies are met
+if [[ ! $(command -v curl)  || ! $(command -v jq) ]] 
+then 
+  echo "requires curl and jq"
+  exit 1
+fi
+
 # global environment values
 export VAULT_HOSTNAME=${VAULT_HOSTNAME}
 export VAULT_TOKEN=${VAULT_TOKEN}
