@@ -25,6 +25,7 @@ if [[ $# -eq 0 ]]
 then
     echo ""
     echo "Action required:"
+    echo "eg: $0 list params"
     echo "eg: $0 get params"
     echo "eg: $0 put params"
     echo ""
@@ -40,16 +41,37 @@ get_secret(){
   curl -s -XGET -H "X-Vault-Token: ${VAULT_TOKEN}" https://${VAULT_HOSTNAME}/v1/${SECRET} | jq -r ".data.${SECRET_KEY}"
 }
 
+list_secrets(){
+  curl -s -XLIST -H "X-Vault-Token: ${VAULT_TOKEN}" https://${REQUEST_URL}/v1/${SECRET} | jq -r ".data"
+}
+
 # main script
 if [ ${1} == "help" ]
 then
 	echo ""
 	echo "Secrets Management Help:"
 	echo "========================"
+	echo "${0} list secret/application-name"
 	echo "${0} put secret/application-name/hostname app.example.com"
 	echo "${0} get secret/application-name/hostname"
 	echo ""
 	exit 0
+	
+elif [ ${1} == "list" ]
+then
+	if [[ $# -ne 2 ]]
+	then
+		echo ""
+		echo "ListSecrets requires the path to include the keys you want to list"
+		echo "usage: $0 list secret/application-name"
+		echo ""
+		exit 1
+	fi
+
+	SECRET=${2}
+	echo "List secrets for ${SECRET}"
+	list_secrets ${SECRET}
+
 
 elif [ ${1} == "put" ] 
 then
