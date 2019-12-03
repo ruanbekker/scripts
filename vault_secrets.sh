@@ -3,6 +3,9 @@
 # Description:
 # Bash Script for put/get secrets to/from Vault
 #
+# List:
+# ./vault_secrets.sh list secret/tmp
+#
 # Get:
 # ./vault_secrets.sh get secret/tmp/hostname
 #
