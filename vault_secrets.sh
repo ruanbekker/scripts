@@ -15,8 +15,8 @@
 # check if dependencies are met
 if [[ ! $(command -v curl)  || ! $(command -v jq) ]] 
 then 
-  echo "requires curl and jq"
-  exit 1
+    	echo "requires curl and jq"
+    	exit 1
 fi
 
 # global environment values
@@ -26,33 +26,33 @@ export VAULT_TOKEN=${VAULT_TOKEN}
 # check if variables are provided
 if [ -z ${VAULT_HOSTNAME} ] || [ -z ${APP_TOKEN} ]
 then 
-	echo "Requires VAULT_HOSTNAME and APP_TOKEN env variables"
-  exit 1
+    	echo "Requires VAULT_HOSTNAME and APP_TOKEN env variables"
+    	exit 1
 fi
 
 # check if args is passed
 if [[ $# -eq 0 ]]
 then
-    echo ""
-    echo "Action required:"
-    echo "eg: $0 list params"
-    echo "eg: $0 get params"
-    echo "eg: $0 put params"
-    echo ""
-    exit 1
+    	echo ""
+    	echo "Action required:"
+    	echo "eg: $0 list params"
+    	echo "eg: $0 get params"
+    	echo "eg: $0 put params"
+    	echo ""
+    	exit 1
 fi
 
 # functions
 put_secret(){
-  curl -s -XPOST -H "X-Vault-Token: ${VAULT_TOKEN}" -d '{"'"${SECRET_KEY}"'": "'"$SECRET_VALUE"'"}' https://${VAULT_HOSTNAME}/v1/${SECRET}
+	curl -s -XPOST -H "X-Vault-Token: ${VAULT_TOKEN}" -d '{"'"${SECRET_KEY}"'": "'"$SECRET_VALUE"'"}' https://${VAULT_HOSTNAME}/v1/${SECRET}
 }
 
 get_secret(){
-  curl -s -XGET -H "X-Vault-Token: ${VAULT_TOKEN}" https://${VAULT_HOSTNAME}/v1/${SECRET} | jq -r ".data.${SECRET_KEY}"
+    	curl -s -XGET -H "X-Vault-Token: ${VAULT_TOKEN}" https://${VAULT_HOSTNAME}/v1/${SECRET} | jq -r ".data.${SECRET_KEY}"
 }
 
 list_secrets(){
-  curl -s -XLIST -H "X-Vault-Token: ${VAULT_TOKEN}" https://${REQUEST_URL}/v1/${SECRET} | jq -r ".data"
+    	curl -s -XLIST -H "X-Vault-Token: ${VAULT_TOKEN}" https://${REQUEST_URL}/v1/${SECRET} | jq -r ".data"
 }
 
 # main script
