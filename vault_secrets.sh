@@ -52,7 +52,7 @@ get_secret(){
 }
 
 list_secrets(){
-    	curl -s -XLIST -H "X-Vault-Token: ${VAULT_TOKEN}" https://${REQUEST_URL}/v1/${SECRET} | jq -r ".data"
+    	curl -s -XLIST -H "X-Vault-Token: ${VAULT_TOKEN}" https://${VAULT_HOSTNAME}/v1/${SECRET} | jq -r ".data"
 }
 
 # main script
