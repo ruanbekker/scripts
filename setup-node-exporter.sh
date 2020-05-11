@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 NODE_EXPORTER_USER="node_exporter"
 
 # check if node exporter user exists
