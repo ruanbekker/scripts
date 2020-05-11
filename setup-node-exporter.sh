@@ -22,10 +22,14 @@ cat > /etc/systemd/system/node_exporter.service << EOF
 Description=Node Exporter
 Wants=network-online.target
 After=network-online.target
+StartLimitIntervalSec=500
+StartLimitBurst=5
 [Service]
 User=${NODE_EXPORTER_USER}
 Group=${NODE_EXPORTER_USER}
 Type=simple
+Restart=on-failure
+RestartSec=5s
 ExecStart=/usr/local/bin/node_exporter
 [Install]
 WantedBy=multi-user.target
