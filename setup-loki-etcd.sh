@@ -10,6 +10,14 @@ LOKI_ETCD_ENDPOINT_1="${ETCD_NODE_1:-127.0.0.1}"
 LOKI_ETCD_ENDPOINT_2="${ETCD_NODE_2:-127.0.0.1}"
 LOKI_ETCD_ENDPOINT_3="${ETCD_NODE_3:-127.0.0.1}"
 
+if [[ ${LOKI_ETCD_ENDPOINT_1} == "127.0.0.1" && ${LOKI_ETCD_ENDPOINT_2} == "127.0.0.1" && ${LOKI_ETCD_ENDPOINT_3} == "127.0.0.1" ]]
+then
+	echo "you are trying to install loki with etcd, but no endpoints are provided"
+  echo "usage:"
+  echo "curl .. | ETCD_NODE_1=127.0.0.1 ETCD_NODE_2=127.0.0.2 ETCD_NODE_3=127.0.0.3 bash -s -"
+	exit 1
+fi
+
 useradd -s /bin/nologin ${LOKI_USER}
 
 wget https://github.com/grafana/loki/releases/download/v${LOKI_VERSION}/loki-linux-amd64.zip
