@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-set -ex
+set -e
 
 # usage:
-# curl .. | ETCD_NODE_1=127.0.0.1 ETCD_NODE_2=127.0.0.2 ETCD_NODE_3=127.0.0.3 bash -s -
+# curl -sL t.ruan.dev/h8pa80u | ETCD_NODE_1=127.0.0.1 ETCD_NODE_2=127.0.0.2 ETCD_NODE_3=127.0.0.3 bash -s -
 
 LOKI_VERSION=1.5.0
 LOKI_USER=loki
