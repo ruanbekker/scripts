@@ -8,7 +8,7 @@ if [ ${EXIT_CODE} == 1 ]
     useradd --no-create-home --shell /bin/false ${NODE_EXPORTER_USER}
 fi
 
-NODE_EXPORTER_VERSION="0.18.1"
+NODE_EXPORTER_VERSION="1.0.1"
 
 wget https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
 tar -xf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
