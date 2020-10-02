@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
 set -ex
 # only on debian atm
-command apt
+which apt
 
-PROMTAIL_USER="grafana"
-PROMTAIL_VERSION="1.3.0"
-LOKI_URL=""
+# set this to your own url
+LOKI_URL="http://192.168.0.4:3100"
+
+PROMTAIL_USER="promtail"
+PROMTAIL_VERSION="1.6.1"
+HOSTNAME=$(hostname)
 
 create_user(){
  useradd --no-create-home --shell /bin/false ${PROMTAIL_USER}
 }
 
-if [ $(id -u root > /dev/null 2>&1 ; echo $?) = 0 ]
-  then 
+if [ $(id -u ${PROMTAIL_USER} > /dev/null 2>&1 ; echo $?) = 0 ]
+  then
     echo "${PROMTAIL_USER} user exists"
-  else 
+  else
     echo "${PROMTAIL_USER} user does not exist, creating.."
     create_user
 fi
