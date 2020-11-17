@@ -2,6 +2,14 @@
 
 CADVISOR_VERSION="0.37.0"
 
+which docker &> /dev/null && EXIT_CODE=${?} || EXIT_CODE=${?}
+if [ ${EXIT_CODE} == 1 ]
+  then
+    echo "docker is required"
+    echo "run: curl https://get.docker.com | bash"
+    exit 1
+fi
+
 if [ -d /usr/local/bin ] 
   then 
     echo "directory exists, using it"
