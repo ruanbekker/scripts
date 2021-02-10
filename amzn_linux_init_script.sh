@@ -9,8 +9,8 @@
 APP="node_exporter"
 DESC="Node Exporter"
 
-# chkconfig ${APP} on
-# description: ${APP}
+# chkconfig: 2345 95 05
+# description: ${DESC}
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 RETVAL=0
