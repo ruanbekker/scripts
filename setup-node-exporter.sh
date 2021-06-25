@@ -17,7 +17,7 @@ if [ -d /usr/local/bin ]
     export BIN_DIRECTORY="/usr/local"
 fi
 
-NODE_EXPORTER_VERSION="1.0.1"
+NODE_EXPORTER_VERSION="1.1.2"
 
 wget https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
 tar -xf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
