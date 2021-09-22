@@ -11,7 +11,7 @@ sudo mkdir -p /opt/${CRYPTO_NAME}/${VERSION}
 sudo mkdir -p /blockchain/${CRYPTO_NAME}/data
 sudo mkdir -p /etc/${CRYPTO_NAME}
 
-sudo tar -xvf ${CRYPTO_NAME}-${VERSION}-${ARCH}-linux-gnueabihf.tar.gz -C /opt/${CRYPTO_NAME}/${VERSION} --strip-components=1
+sudo tar -xvf ${CRYPTO_NAME}-${VERSION}-${ARCH}-linux-gnu.tar.gz -C /opt/${CRYPTO_NAME}/${VERSION} --strip-components=1
 sudo ln -s /opt/${CRYPTO_NAME}/${VERSION} /opt/${CRYPTO_NAME}/current
 
 sudo chown -R "$(whoami):$(whoami)" /blockchain
