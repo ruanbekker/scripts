@@ -1,14 +1,30 @@
 #!/usr/bin/env bash
 set -ex
-# only on debian atm
-which apt
+
+# check if this script has been called by root
+if [ "$EUID" -ne 0 ]
+  then echo "Run this script as root"
+  exit
+fi
+
+# check if dependencies is installed
+for command in apt unzip wget
+do
+  if [ $(which ${command} > /dev/null 2>&1 ; echo $?) != 0 ]
+    then
+      echo "${command} is not installed"
+      exit 1
+  fi
+done
 
 # set this to your own url
-LOKI_URL="http://192.168.0.4:3100"
+export LOKI_URL="http://192.168.0.4:3100"
 
-PROMTAIL_USER="promtail"
-PROMTAIL_VERSION="1.6.1"
-HOSTNAME=$(hostname)
+export PROMTAIL_USER="promtail"
+export PROMTAIL_VERSION="2.5.0"
+export HOSTNAME=$(hostname)
+export TENANT=tenant-x
+export ENVIRONMENT=sandbox
 
 create_user(){
  useradd --no-create-home --shell /bin/false ${PROMTAIL_USER}
@@ -62,7 +78,8 @@ scrape_configs:
       path: /var/log/journal
       labels:
         job: systemd-journal
-        env: production
+        tenant: $TENANT
+        env: $ENVIRONMENT
         host: $HOSTNAME
     relabel_configs:
       - source_labels: ['__journal__systemd_unit']
