@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 loadswap() {
- dd if=/dev/zero of=/opt/swapfile.swp bs=1M count=2048
- chmod 0600 /opt/swapfile.swp
- mkswap /opt/swapfile.swp
- swapon /opt/swapfile.swp
+ sudo dd if=/dev/zero of=/opt/swapfile.swp bs=1M count=2048
+ sudo chmod 0600 /opt/swapfile.swp
+ sudo mkswap /opt/swapfile.swp
+ sudo swapon /opt/swapfile.swp
 }
 
 unloadswap() {
- swapoff /opt/swapfile.swp
+ sudo swapoff /opt/swapfile.swp
 }
 
 if [[ $1 = "start" ]];
