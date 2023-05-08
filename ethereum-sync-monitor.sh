@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
+interval=${1:-5}
 
 function getLastSyncedBlock(){
-  curl -s -XPOST -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":51}' http://127.0.0.1:8545 | jq -r '.result' | tr -d '\n' |  xargs -0 printf "%d"
+  curl -s -XPOST -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://127.0.0.1:8545 | jq -r '.result' | tr -d '\n' |  xargs -0 printf "%d"
 }
 
 function getHighestBlockNumber(){
-  curl -s -XPOST -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", false],"id":51}' http://127.0.0.1:8545 | jq -r '.result.number' | tr -d '\n' |  xargs -0 printf "%d"
+  curl -s -XPOST -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", false],"id":1}' http://127.0.0.1:8545 | jq -r '.result.number' | tr -d '\n' |  xargs -0 printf "%d"
 }
 
 while true;
@@ -15,7 +16,8 @@ do
   highestBlockNumber=$(getHighestBlockNumber)
   timeStamp=$(curl -s -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["'"$currentBlockNumber"'", false],"id":1}' localhost:8545  | jq -r ".result.timestamp" | tr -d '\n' |  xargs -0 printf "%d")
   dateStamp=$(date -d @"$timeStamp")
-
+  #macDateStamp=$(date -r $timestamp)
+  
   highestBlockTimestamp=$(curl -s -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["'"$highestBlockNumber"'", false],"id":1}' localhost:8545 | jq -r '.result.timestamp' | tr -d '\n' |  xargs -0 printf "%d")
   currentTime=$(date +%s)
   seconds=$(($currentTime - $highestBlockTimestamp))
@@ -31,7 +33,6 @@ do
   echo "HighestBlockNumber: $highestBlockNumber"
   echo "Blocks Left to sync: $(($highestBlockNumber - $currentBlockNumber))"
   echo "Current Blocknumber Datestamp: $dateStamp"
-  #echo "Block: $localBlock"
   echo ""
   echo ":: Time Left ::"
   echo "Seconds: $seconds"
@@ -39,6 +40,6 @@ do
   echo "Hours: $hours"
   echo ""
   echo "-----------------------------------------"
-  sleep 10
+  sleep $interval
 
 done
