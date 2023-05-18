@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-NODE_EXPORTER_VERSION="0.18.1"
+NODE_EXPORTER_VERSION="1.5.0"
 
-rm -rf node_exporter-*
-wget https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
-tar -xf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
-cp node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64/node_exporter /usr/local/bin/
-rm -rf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64*
+ned=$(mktemp -d)
+pushd $ned
+wget -qO - https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz | tar --strip 1 -zxv
+install -o root -g root -m 0755 node_exporter /usr/local/bin/node_exporter
+popd 
 
-cat > /etc/systemd/system/node_exporter.service << EOF
+sudo tee -a /etc/systemd/system/node_exporter.service > /dev/null << EOF
 [Unit]
 Description=Node Exporter
 Wants=network-online.target
@@ -22,5 +22,6 @@ ExecStart=/usr/local/bin/node_exporter
 WantedBy=multi-user.target
 EOF
 
-systemctl daemon-reload
-systemctl start node_exporter
+sudo systemctl daemon-reload
+sudo systemctl enable node_exporter
+sudo systemctl start node_exporter
