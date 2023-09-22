@@ -5,7 +5,7 @@ NODE_EXPORTER_VERSION="1.5.0"
 ned=$(mktemp -d)
 pushd $ned
 wget -qO - https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz | tar --strip 1 -zxv
-install -o root -g root -m 0755 node_exporter /usr/local/bin/node_exporter
+sudo install -o root -g root -m 0755 node_exporter /usr/local/bin/node_exporter
 popd 
 
 sudo tee -a /etc/systemd/system/node_exporter.service > /dev/null << EOF
