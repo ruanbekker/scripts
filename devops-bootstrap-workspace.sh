@@ -38,3 +38,15 @@ then
   sudo install -o root -g root -m 0755 kind /usr/local/bin/kind
   rm -f kind
 fi
+
+# Populate config
+# cat > kind-config.yaml << EOF
+# kind: Cluster
+# apiVersion: kind.x-k8s.io/v1alpha4
+# nodes:
+# - role: control-plane
+# - role: worker
+# - role: worker
+# - role: worker
+# EOF
+# kind create cluster --config kind-config.yaml
