@@ -50,3 +50,8 @@ fi
 # - role: worker
 # EOF
 # kind create cluster --config kind-config.yaml
+
+# too many open files
+# sudo sysctl -w fs.inotify.max_user_watches=2099999999
+# sudo sysctl -w fs.inotify.max_user_instances=2099999999
+# sudo sysctl -w fs.inotify.max_queued_events=2099999999
