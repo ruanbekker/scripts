@@ -22,6 +22,45 @@ then
   rm -f kubectl
 fi
 
+# Kubectx
+if [ ! -f /usr/local/bin/kubectx ]
+then
+  echo "[INFO] installing kubectx"
+  jump_dir=$(mktemp -d)
+  pushd $jump_dir
+  wget https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_x86_64.tar.gz
+  tar -xf kubectx_v0.9.5_linux_x86_64.tar.gz
+  sudo install -o root -g root -m 0755 kubectx /usr/local/bin/kubectx
+  rm -f kubectx_v0.9.5_linux_x86_64.tar.gz
+  popd
+fi
+
+# Kubens
+if [ ! -f /usr/local/bin/kubens ]
+then
+  echo "[INFO] installing kubens"
+  jump_dir=$(mktemp -d)
+  pushd $jump_dir
+  wget https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_x86_64.tar.gz
+  tar -xf kubens_v0.9.5_linux_x86_64.tar.gz
+  sudo install -o root -g root -m 0755 kubens /usr/local/bin/kubens
+  rm -f kubens_v0.9.5_linux_x86_64.tar.gz
+  popd
+fi
+  
+# Stern
+if [ ! -f /usr/local/bin/stern ]
+then
+  echo "[INFO] installing stern"
+  jump_dir=$(mktemp -d)
+  pushd $jump_dir
+  wget https://github.com/stern/stern/releases/download/v1.26.0/stern_1.26.0_linux_amd64.tar.gz
+  tar -xf stern_1.26.0_linux_amd64.tar.gz
+  sudo install -o root -g root -m 0755 stern /usr/local/bin/stern
+  rm -f stern_1.26.0_linux_amd64.tar.gz
+  popd
+fi
+
 # Docker
 if [ ! -f /usr/bin/docker ]
 then
