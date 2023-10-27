@@ -6,6 +6,14 @@
 # - docker
 # - kind
 
+# Vim extras
+if [ "$EXTRAS_ENABLED" = "1" ]
+then 
+  # install vim configs
+  curl https://raw.githubusercontent.com/ruanbekker/bash-setup/main/setup.sh | bash
+  echo "[INFO] post-install: run :PlugInstall inside vim"
+fi
+
 # Helm
 if [ ! -f /usr/local/bin/helm ]
 then
