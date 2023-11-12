@@ -87,6 +87,8 @@ current_block_timestamp=$(cat /tmp/result_block.json | jq -r '.result.timestamp'
 current_block_timestamp_formatted=$(date -d "@$current_block_timestamp" "+%Y-%m-%d %H:%M:%S")
 current_block_delta=$((current_timestamp - current_block_timestamp))
 current_block_delta_minutes=$((current_block_delta / 60))
+current_block_delta_hours=$((current_block_delta_minutes / 60))
+current_block_delta_days=$((current_block_delta_hours / 24))
 
 # if initial sync is happening we will get the current local block and the highest block of node start time
 # we can use this to identify how many blocks it still need to sync, once the initial sync is done, this will become false
@@ -127,6 +129,6 @@ echo "current block extra data: $current_block_extraData"
 echo "current block withdrawalsRoot: $current_block_withdrawalsRoot"
 echo "current block transactionsRoot: $current_block_transactionsRoot"
 echo "current block timestamp: $current_block_timestamp / $current_block_timestamp_formatted"
-echo "current block timestamp delta: $current_block_delta_minutes minutes"
+echo "current block timestamp delta: $current_block_delta_minutes minutes | $current_block_delta_hours hours | $current_block_delta_days days"
 echo "current block delta: $((current_highest_block - current_block))"
 echo ""
