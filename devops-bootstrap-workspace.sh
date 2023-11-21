@@ -86,6 +86,19 @@ then
   rm -f kind
 fi
 
+# Btop
+if [ ! -f /usr/local/bin/btop ] && [ "$EXTRAS_ENABLED" = "1" ]
+then
+  echo "[INFO] installing btop"
+  pushd /tmp
+  sudo apt install git wget gcc lbzip2 -y
+  wget https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz
+  tar -xf btop-x86_64-linux-musl.tbz
+  cd btop
+  sudo make install
+  popd
+if
+
 # Populate config
 # cat > kind-config.yaml << EOF
 # kind: Cluster
