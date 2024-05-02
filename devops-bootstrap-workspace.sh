@@ -97,7 +97,7 @@ then
   cd btop
   sudo make install
   popd
-if
+fi
 
 # Populate config
 # cat > kind-config.yaml << EOF
