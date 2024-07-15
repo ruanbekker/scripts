@@ -2,6 +2,7 @@
 
 # This installs:
 # - helm
+# - helm-docs
 # - kubectl
 # - docker
 # - kind
@@ -19,6 +20,18 @@ if [ ! -f /usr/local/bin/helm ]
 then
   echo "[INFO] installing helm"
   curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+fi
+
+# Helm Docs
+if [ ! -f /usr/local/bin/helm-docs ]
+then
+  echo "[INFO] installing helm-docs"
+  jump_dir=$(mktemp -d)
+  pushd $jump_dir
+  wget https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz
+  tar -xvf helm-docs_1.14.2_Linux_x86_64.tar.gz
+  sudo mv helm-docs /usr/local/bin/
+  popd
 fi
 
 # Kubectl
