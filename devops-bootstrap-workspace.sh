@@ -34,6 +34,20 @@ then
   popd
 fi
 
+# Helmfile
+if [ ! -f /usr/local/bin/helmfile ]
+then
+  echo "[INFO] installing helmfile"
+  jump_dir=$(mktemp -d)
+  pushd $jump_dir
+  wget https://github.com/helmfile/helmfile/releases/download/v1.0.0-rc.4/helmfile_1.0.0-rc.4_linux_amd64.tar.gz
+  tar -xvf helmfile_1.0.0-rc.4_linux_amd64.tar.gz
+  sudo install -o root -g root -m 0755 ./helmfile /usr/local/bin/helmfile
+  rm helmfile
+  rm helmfile_1.0.0-rc.4_linux_amd64.tar.gz
+  popd
+fi
+
 # Kubectl
 if [ ! -f /usr/local/bin/kubectl ]
 then
